@@ -299,8 +299,9 @@ function beforePrint(landscape) {
 
             printGraphs[x].fromJSON(graphJson);
 
-            var originX = -1 * printGraphs[x].getBBox(printGraphs[x].getCells()).x - i*printSize.width;
-            var originY = -j*printSize.height;
+            var elementsBBox = printGraphs[x].getBBox(printGraphs[x].getCells());
+            var originX = - elementsBBox.x - i * printSize.width;
+            var originY = - elementsBBox.y - j * printSize.height;
 
             printPapers[x].setOrigin(originX, originY);
 
@@ -347,7 +348,7 @@ function beforePrint(landscape) {
             el.setAttribute('width', '100%')
             el.setAttribute('height', '100%')
         });
-       
+
     }
 };
 
