@@ -222,17 +222,19 @@ var printGraphs = [];
 
 $('#printLandscape').click(function () {
     beforePrint(true);
-    //window.print();
+    window.print();
 
-    /*f*/
+    setTimeout(function(){
+        $(window).one('mousemove', window.onafterprint);
+    }, 1);
 });
 $('#printPortrait').click(function () {
     beforePrint();
-    //window.print();
+    window.print();
 
-    /*setTimeout(function(){
+    setTimeout(function(){
         $(window).one('mousemove', window.onafterprint);
-    }, 1);*/
+    }, 1);
 });
 
 window.onafterprint = function(e){
@@ -262,13 +264,13 @@ function beforePrint(landscape) {
     console.log(bbox, content);
     if (landscape) {
         var printSize = {
-            width: 1600,
-            height: 1000
+            width: 1692,
+            height: 1050
         }
     } else {
         var printSize = {
-            width: 1000,
-            height: 1410
+            width: 1200,
+            height: 1692
         }
     }
     var wide = Math.ceil(bbox.width / printSize.width);
@@ -311,18 +313,16 @@ function beforePrint(landscape) {
                 _.each(elements, function (e) {
                     var bbox = e.model.getBBox();
                     if (bbox.x + bbox.width >= area.x + printSize.width) {
-                        e.model.set('position', {x: area.x + printSize.width + 60, y: bbox.y});
+                        e.model.set('position', {x: area.x + printSize.width + 5, y: bbox.y});
                         moveX = Math.abs(bbox.x - (area.x + printSize.width));
-                        //debugger;
                         _.each(printGraphs[x].getElements(), function (element) {
-                            //debugger;
                             var elBbox = element.getBBox();
-                            if (elBbox.x >= bbox.x && e.model.id != element.id) {
+                            if (elBbox.x > bbox.x && e.model.id != element.id) {
                                 element.set('position', {x: elBbox.x + moveX, y: elBbox.y});
                             }
                         });
                     }
-                    if (bbox.y + bbox.height >= printSize.height) {
+                    if (bbox.y + bbox.height > printSize.height) {
                         e.model.set('position', {x: bbox.x, y: printSize.height + bbox.height + 5});
                         moveY = Math.abs(bbox.y - (area.y + printSize.height));
                         _.each(printGraphs[x].getElements(), function (element) {
@@ -347,17 +347,9 @@ function beforePrint(landscape) {
             el.setAttribute('width', '100%')
             el.setAttribute('height', '100%')
         });
-        //console.log(bbox.x + i * printSize.width);
-        //printGraphs[i].getArea();
+       
     }
 };
 
-
-/*function layout() {
-    joint.layout.DirectedGraph.layout(graph, {
-        rankDir: $(".toggle-layout-direction input").is(":checked") ? "LR" : "TB",
-        setLinkVertices: false
-    })
-}*/
 var subtrees = {};
 var uptrees = {};
