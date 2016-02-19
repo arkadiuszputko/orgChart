@@ -65,7 +65,7 @@ var createPapers = function (graph) {
                         return a instanceof joint.dia.Link ? 1 : -1
                     }));
                     delete subtrees[cell.id];
-                    return layout;
+                    return;
                 }
 
                 function store(cell) {
@@ -83,7 +83,7 @@ var createPapers = function (graph) {
                         return a instanceof joint.dia.Link ? 1 : -1
                     }));
                     delete uptrees[cell.id];
-                    return layout;
+                    return;
                 }
 
                 function storeTree(cell) {
@@ -218,8 +218,6 @@ var layoutTables = function (graph) {
 
 var printPapers = [];
 var printGraphs = [];
-var printPaperScrollers = [];
-var printGraphLayouts = [];
 
 
 $('#printLandscape').click(function () {
@@ -244,9 +242,12 @@ window.onafterprint = function(e){
 
 
 function afterPrint() {
-    _.each($('.print-papers'), function (el) {
-        el.remove();
-    });
+
+    _.invoke(printPapers, 'remove');
+    printPapers = [];
+    printGraphs = [];
+
+    $('.print-papers').remove();
     $('#paper').show();
     $('#printPortrait').show();
     $('#printLandscape').show();
@@ -360,6 +361,3 @@ function beforePrint(landscape) {
 }*/
 var subtrees = {};
 var uptrees = {};
-
-
-
