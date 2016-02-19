@@ -1,0 +1,82 @@
+body {
+	background: #d8d9d8;
+}
+.link > * {
+	display: none;
+}
+.link .labels {
+	display: initial;
+}
+.link .connection {
+	display: initial;
+}
+.expand {
+	cursor: pointer;
+}
+.paper-scroller {
+	overflow: scroll;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.paper {
+	margin: 0 !important;
+}
+#paper {
+	width: 100%;
+}
+@media print {
+
+    @page {
+        margin: 5mm;
+    }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body:before {
+        content: 'JointJS';
+        font-size: 15mm;
+        position: absolute;
+        top: 5mm;
+        right: 5mm;
+        z-index: 100000;
+    }
+
+    /* Do not display the above for foreign object bodies */
+    .fobj > body:before {
+        display: none;
+    }
+
+    .printarea {
+        left: 0 !important;
+        top: 0 !important;
+        background: none !important;
+        border: none !important;
+        margin: 0mm !important;
+        padding: 0mm !important;
+        overflow: visible !important;
+        z-index: 99999;
+    }
+
+    .printarea > *:not(svg) {
+        display: none;
+    }
+}
+@media print and (orientation:landscape) {
+
+    .print-papers {
+        width: 260mm !important;
+        height: 174mm !important;
+    }
+
+}
+
+@media print and (orientation:portrait) {
+
+    .print-papers {
+        width: 200mm !important;
+        height: 232mm !important;
+    }
+}
