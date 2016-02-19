@@ -12,6 +12,7 @@ body {
 }
 .expand {
 	cursor: pointer;
+  pointer-events: bounding-box;
 }
 .paper-scroller {
 	overflow: scroll;
