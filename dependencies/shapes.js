@@ -18,7 +18,7 @@ joint.shapes.orgChart = {};
 
 joint.shapes.orgChart.Node = joint.dia.Element.extend({
 
-    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="name"/><path class="expand"/></g>',
+    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="content"/><path class="expand"/></g>',
 
     defaults: joint.util.deepSupplement({
 
@@ -32,7 +32,7 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
                 'pointer-events': 'visiblePainted', rx: 10, ry: 10
             },
 
-            '.name': {
+            '.content': {
                 'font-weight': 500,
                 'font-family': 'Courier New', 'font-size': 16,
                 'text-anchor': 'middle',
@@ -56,7 +56,7 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
 
 joint.shapes.orgChart.Table = joint.dia.Element.extend({
 
-    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="rank"/><text class="name"/></g>',
+    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="title"/><text class="content"/></g>',
 
     defaults: joint.util.deepSupplement({
 
@@ -76,14 +76,14 @@ joint.shapes.orgChart.Table = joint.dia.Element.extend({
                 rx: 10, ry: 10
             },
 
-            '.rank': {
+            '.title': {
                 'text-decoration': 'underline',
                 ref: '.card', 'ref-x': 0.9, 'ref-y': 0.2,
                 'font-family': 'Courier New', 'font-size': 14,
                 'text-anchor': 'end'
             },
 
-            '.name': {
+            '.content': {
                 'font-weight': 800,
                 ref: '.card', 'ref-x': 0.9, 'ref-y': 0.6,
                 'font-family': 'Courier New', 'font-size': 14,

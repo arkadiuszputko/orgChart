@@ -2,7 +2,7 @@
     "cells": [
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Founder & Chairman"
                 }
             },
@@ -15,7 +15,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "President & CEO"
                 }
             },
@@ -28,7 +28,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "President, PayPal"
                 }
             },
@@ -41,7 +41,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "President, Ebay Global\nMarketplaces"
                 }
             },
@@ -54,7 +54,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Senior Vice President\nHuman Resources"
                 }
             },
@@ -67,7 +67,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Senior Vice President\nController"
                 }
             },
@@ -80,7 +80,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Fuzzy"
                 }
             },
@@ -93,7 +93,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Paprot\n See Table 1"
                 }
             },
@@ -107,7 +107,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Bartek\nSee Table 2"
                 }
             },
@@ -121,7 +121,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Lukasz\nSee Table 3"
                 }
             },
@@ -135,7 +135,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Arek\nSee Table 4"
                 }
             },
@@ -149,7 +149,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Founder & Chairman 2"
                 }
             },
@@ -162,7 +162,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "President & CEO"
                 }
             },
@@ -175,7 +175,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "President, PayPal 2"
                 }
             },
@@ -188,7 +188,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "President, Ebay Global\nMarketplaces"
                 }
             },
@@ -201,7 +201,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Senior Vice President\nHuman Resources"
                 }
             },
@@ -214,7 +214,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Senior Vice President\nController"
                 }
             },
@@ -227,7 +227,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Fuzzy 2"
                 }
             },
@@ -240,7 +240,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Paprot"
                 }
             },
@@ -253,7 +253,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Bartek"
                 }
             },
@@ -266,7 +266,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Lukasz 2"
                 }
             },
@@ -279,7 +279,7 @@
         },
         {
             "attrs": {
-                ".name": {
+                ".content": {
                     "text": "Arek"
                 }
             },
@@ -732,10 +732,10 @@
         },
         {
             "attrs": {
-                ".rank": {
+                ".title": {
                     "text": "Table for Paprot"
                 },
-                ".name": {
+                ".content": {
                     "text": "foo"
                 }
             },
@@ -749,10 +749,10 @@
         },
         {
             "attrs": {
-                ".rank": {
+                ".title": {
                     "text": "Table for Bartek"
                 },
-                ".name": {
+                ".content": {
                     "text": "baz"
                 }
             },
@@ -765,10 +765,10 @@
         },
         {
             "attrs": {
-                ".rank": {
+                ".title": {
                     "text": "Table for Lukasz"
                 },
-                ".name": {
+                ".content": {
                     "text": "blah"
                 }
             },
@@ -781,10 +781,10 @@
         },
         {
             "attrs": {
-                ".rank": {
+                ".title": {
                     "text": "Table for Arek"
                 },
-                ".name": {
+                ".content": {
                     "text": "Arek Pompini"
                 }
             },

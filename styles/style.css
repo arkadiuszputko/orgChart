@@ -38,7 +38,7 @@ body {
 }
 
 /* Highlight the first row of Node text */
-.element.Node .name > tspan:first-child {
+.element.Node .content > tspan:first-child {
   font-weight: 800;
 }
 
