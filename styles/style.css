@@ -1,15 +1,6 @@
 body {
 	background: #d8d9d8;
 }
-.link > * {
-	display: none;
-}
-.link .labels {
-	display: initial;
-}
-.link .connection {
-	display: initial;
-}
 .expand {
 	cursor: pointer;
   pointer-events: bounding-box;
