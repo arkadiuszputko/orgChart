@@ -26,19 +26,19 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
         size: { width: 260, height: 90 },
         attrs: {
 
-            rect: { width: 260, height: 90,  'stroke': '#000000', 'stroke-width': 1},//filter: { name: 'dropShadow', args: { x: 5, dx: 5, dy: 5, blur: 3 } } },
-
             '.card': {
+                width: 260, height: 90,  'stroke': '#000000', 'stroke-width': 1,
                 fill: '#FFFFFF', stroke: '#000000', 'stroke-width': 1,
                 'pointer-events': 'visiblePainted', rx: 10, ry: 10
             },
 
             '.name': {
-                'font-weight': '800',
+                'font-weight': 500,
                 'font-family': 'Courier New', 'font-size': 14,
                 'text-anchor': 'middle',
-                ref: '.card', 'ref-x': .5, 'ref-y': 10,
+                ref: '.card', 'ref-x': .5, 'ref-y': 10
             },
+
             '.expand': {
                 ref: '.card',
                 'ref-dx': -25,
@@ -49,14 +49,13 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
                 'd': 'M 10 0 10 20 M 0 10 20 10'
             }
         }
-    }, joint.dia.Element.prototype.defaults),
-
+    }, joint.dia.Element.prototype.defaults)
 
 });
 
 joint.shapes.orgChart.Table = joint.dia.Element.extend({
 
-    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/><image/></g><text class="rank"/><text class="name"/></g>',
+    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="rank"/><text class="name"/></g>',
 
     defaults: joint.util.deepSupplement({
 
@@ -64,18 +63,16 @@ joint.shapes.orgChart.Table = joint.dia.Element.extend({
         size: { width: 180, height: 70 },
         attrs: {
 
-            '.': {'pointer-events': 'none'},
-
-            rect: { width: 170, height: 60 },
-
-            '.card': {
-                fill: '#FFFFFF', stroke: '#000000', 'stroke-width': 2,
-                rx: 10, ry: 10
+            '.': {
+                'pointer-events': 'none'
             },
 
-            image: {
-                width: 48, height: 48,
-                ref: '.card', 'ref-x': 10, 'ref-y': 5
+            '.card': {
+                width: 170, height: 60,
+                fill: '#FFFFFF',
+                stroke: '#000000',
+                'stroke-width': 2,
+                rx: 10, ry: 10
             },
 
             '.rank': {
@@ -86,7 +83,7 @@ joint.shapes.orgChart.Table = joint.dia.Element.extend({
             },
 
             '.name': {
-                'font-weight': '800',
+                'font-weight': 800,
                 ref: '.card', 'ref-x': 0.9, 'ref-y': 0.6,
                 'font-family': 'Courier New', 'font-size': 14,
                 'text-anchor': 'end'
@@ -96,18 +93,21 @@ joint.shapes.orgChart.Table = joint.dia.Element.extend({
 });
 
 joint.shapes.orgChart.Connection = joint.dia.Link.extend({
+
     markup: [
         '<path class="connection" stroke="black" d="M 0 0 0 0"/>',
         '<g class="labels"/>'
     ].join(''),
 
-    defaults: {
+    defaults: joint.util.deepSupplement({
         type: 'orgChart.Connection',
-        source: { selector: '.card' }, target: { selector: '.card' },
         attrs: {
-            '.connection': { stroke: '#585858', 'stroke-width': 3 },
-            '.': {'pointer-events': 'none'}
-        },
-        z: 1
-    }
+            '.connection': {
+                'stroke-width': 3
+            },
+            '.': {
+                'pointer-events': 'none'
+            }
+        }
+    }, joint.dia.Link.prototype.defaults)
 });
