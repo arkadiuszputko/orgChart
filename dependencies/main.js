@@ -232,6 +232,7 @@ $('#printLandscape').click(function () {
         $(window).one('mousemove', window.onafterprint);
     }, 1);
 });
+/*
 $('#printPortrait').click(function () {
     beforePrint();
     window.print();
@@ -240,7 +241,7 @@ $('#printPortrait').click(function () {
         $(window).one('mousemove', window.onafterprint);
     }, 1);
 });
-
+*/
 window.onafterprint = function(e){
     $(window).off('mousemove', window.onafterprint);
     afterPrint();
