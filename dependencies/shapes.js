@@ -103,7 +103,7 @@ joint.shapes.orgChart.Connection = joint.dia.Link.extend({
         type: 'orgChart.Connection',
         attrs: {
             '.connection': {
-                'stroke-width': 3
+                'stroke-width': 1
             },
             '.': {
                 'pointer-events': 'none'
