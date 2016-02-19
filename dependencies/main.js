@@ -336,14 +336,15 @@ function beforePrint(landscape) {
                             x: bbox.x,
                             y: area.y + printSize.height + 5
                         });
-                        moveY = Math.abs(bbox.y - (area.y + printSize.height));
-                        _.each(printGraphs[x].getElements(), function (element) {
-                            if (element.get('type') === 'orgChart.Table') return;
-                            var elBbox = element.getBBox();
-                            if (elBbox.y > bbox.y && e.id != element.id) {
-                                element.set('position', {x: elBbox.x, y: elBbox.y + moveY});
-                            }
-                        });
+                        if (e.get('type') !== 'orgChart.Table') {
+                            moveY = Math.abs(bbox.y - (area.y + printSize.height));
+                            _.each(printGraphs[x].getElements(), function (element) {
+                                var elBbox = element.getBBox();
+                                if (elBbox.y > bbox.y && e.id != element.id) {
+                                    element.set('position', {x: elBbox.x, y: elBbox.y + moveY});
+                                }
+                            });
+                        }
                     }
                 });
             } else {
