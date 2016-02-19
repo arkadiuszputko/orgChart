@@ -18,26 +18,30 @@ body {
 }
 @media print {
 
-    @page {
-        margin: 5mm;
-    }
+  @page {
+    margin: 5mm;
+  }
 
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-    body:before {
-        content: '' !important;
-    }
+  body:before {
+    content: '' !important;
+  }
 
-    /* Hide collapse controls when printing */
-    .element.Node .expand {
-        display: none;
-    }
+  /* Hide collapse controls when printing */
+  .element.Node .expand {
+    display: none;
+  }
 }
 
 /* Highlight the first row of Node text */
 .element.Node .name > tspan:first-child {
   font-weight: 800;
+}
+
+.link.Connection .label rect {
+  fill: #d8d9d8;
 }

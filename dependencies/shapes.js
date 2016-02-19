@@ -48,7 +48,8 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
                 'stroke-width': 1,
                 'd': 'M 10 0 10 20 M 0 10 20 10'
             }
-        }
+        },
+        z: 3
     }, joint.dia.Element.prototype.defaults)
 
 });
@@ -88,7 +89,8 @@ joint.shapes.orgChart.Table = joint.dia.Element.extend({
                 'font-family': 'Courier New', 'font-size': 14,
                 'text-anchor': 'end'
             }
-        }
+        },
+        z: 2
     }, joint.dia.Element.prototype.defaults)
 });
 
@@ -108,6 +110,7 @@ joint.shapes.orgChart.Connection = joint.dia.Link.extend({
             '.': {
                 'pointer-events': 'none'
             }
-        }
+        },
+        z: 1
     }, joint.dia.Link.prototype.defaults)
 });

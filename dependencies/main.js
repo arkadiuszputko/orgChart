@@ -27,9 +27,8 @@ graph.on('remove', function (cell) {
 });
 
 $.get('./dependencies/data.json', function (data) {
-    var graphFromJSON = {"cells":[{"type":"orgChart.Node","position":{"x":200,"y":70},"size":{"width":260,"height":90},"angle":0,"id":"ee47e055-e945-417e-b91d-1f21d1331fa6","embeds":"","z":1,"attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"foo\nbar\nbaz\n30 characters long or maybe eve","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Node","position":{"x":440,"y":124},"size":{"width":260,"height":90},"angle":0,"id":"9b8b517d-b138-4029-9d59-645ce4885b9a","embeds":"","z":2,"custom":"tableId","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Node","position":{"x":440,"y":124},"size":{"width":260,"height":90},"angle":0,"id":"9b8b517d-b138-4567-9d59-645ce4885b9a","embeds":"","z":2,"tableId":"f9e19018-dd02-45a8-8eb2-77aece9754e2","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Node","position":{"x":440,"y":124},"size":{"width":260,"height":90},"angle":0,"id":"9b8b517d-b138-4568-9d59-645ce4885b9a","embeds":"","z":2,"custom":"tableId","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Table","size":{"width":90,"height":54},"position":{"x":150,"y":370},"angle":0,"id":"f9e19018-dd02-45a8-8eb2-77aece9754e2","embeds":"","z":1,"attrs":{"rect":{"fill":"#ffffff","stroke-width":1,"stroke-dasharray":"0"},"text":{"text":"Table 1","fill":"#333333","font-family":"Arial","stroke":"#000000","stroke-width":0,"font-weight":400}}},{"type":"orgChart.Connection","source":{"id":"ee47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"9b8b517d-b138-4029-9d59-645ce4885b9a"},"id":"92c871f9-d944-4ef1-a7b3-884d608fea5b","embeds":"","z":4,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Node","position":{"x":60,"y":230},"size":{"width":260,"height":90},"angle":0,"id":"e3591a38-60c5-4d04-95e6-9aec6d3c0ad9","embeds":"","z":5,"custom":"","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Connection","source":{"id":"ee47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"e3591a38-60c5-4d04-95e6-9aec6d3c0ad9"},"id":"5517dff5-253a-46a5-8dee-0c2485af88fb","embeds":"","z":6,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Connection","source":{"id":"ee47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"9b8b517d-b138-4567-9d59-645ce4885b9a"},"id":"5517dff5-253a-46z5-8dee-0c2485af88fb","embeds":"","z":6,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Connection","source":{"id":"ee47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"9b8b517d-b138-4568-9d59-645ce4885b9a"},"id":"5517dff5-253a-46f5-8dee-0c2485af88fb","embeds":"","z":6,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Node","position":{"x":200,"y":70},"size":{"width":260,"height":90},"angle":0,"id":"1e47e055-e945-417e-b91d-1f21d1331fa6","embeds":"","z":1,"attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Node","position":{"x":440,"y":124},"size":{"width":260,"height":90},"angle":0,"id":"1b8b517d-b138-4029-9d59-645ce4885b9a","embeds":"","z":2,"custom":"tableId","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Node","position":{"x":440,"y":124},"size":{"width":260,"height":90},"angle":0,"id":"1b8b517d-b138-4567-9d59-645ce4885b9a","embeds":"","z":2,"tableId":"19e19018-dd02-45a8-8eb2-77aece9754e2","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Node","position":{"x":440,"y":124},"size":{"width":260,"height":90},"angle":0,"id":"1b8b517d-b138-4568-9d59-645ce4885b9a","embeds":"","z":2,"custom":"tableId","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Table","size":{"width":90,"height":54},"position":{"x":150,"y":370},"angle":0,"id":"19e19018-dd02-45a8-8eb2-77aece9754e2","embeds":"","z":1,"attrs":{"rect":{"fill":"#ffffff","stroke-width":1,"stroke-dasharray":"0"},"text":{"text":"Table 1","fill":"#000000","font-family":"Arial","stroke":"#000000","stroke-width":0,"font-weight":400}}},{"type":"orgChart.Connection","source":{"id":"1e47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"1b8b517d-b138-4029-9d59-645ce4885b9a"},"id":"12c871f9-d944-4ef1-a7b3-884d608fea5b","embeds":"","z":4,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Node","position":{"x":60,"y":230},"size":{"width":260,"height":90},"angle":0,"id":"13591a38-60c5-4d04-95e6-9aec6d3c0ad9","embeds":"","z":5,"custom":"","attrs":{"rect":{"fill":"#ffffff","stroke-width":1},"text":{"fill":"#000","text":"rect\ntest 123","font-family":"Arial","font-weight":400}}},{"type":"orgChart.Connection","source":{"id":"1e47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"13591a38-60c5-4d04-95e6-9aec6d3c0ad9"},"id":"1517dff5-253a-46a5-8dee-0c2485af88fb","embeds":"","z":6,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Connection","source":{"id":"1e47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"1b8b517d-b138-4567-9d59-645ce4885b9a"},"id":"1517dff5-253a-46z5-8dee-0c2485af88fb","embeds":"","z":6,"attrs":{".connection":{"stroke":"black"}}},{"type":"orgChart.Connection","source":{"id":"1e47e055-e945-417e-b91d-1f21d1331fa6"},"target":{"id":"1b8b517d-b138-4568-9d59-645ce4885b9a"},"id":"1517dff5-253a-46f5-8dee-0c2485af88fb","embeds":"","z":6,"attrs":{".connection":{"stroke":"black"}}}]};;
-    graph.fromJSON(graphFromJSON);
 
+    graph.fromJSON(data);
     createPapers(graph);
     layoutGraph(graph);
     layoutTables(graph);
@@ -43,17 +42,14 @@ var createPapers = function (graph) {
             _.each(children(cellView.model), function (child) {
                 child.distance = {
                     x: child.get('position').x - cellView.model.touchPosition.x,
-                    y: child.get('position').y - cellView.model.touchPosition.y,
-                }
+                    y: child.get('position').y - cellView.model.touchPosition.y
+                };
             });
         }
     });
     paper.on("cell:pointerup", function(cellView, evt, x, y) {
         if (cellView.model instanceof joint.shapes.orgChart.Node) {
             this.touchPosition = null;
-            _.each(children(cellView.model), function (child) {
-                null;
-            })
         }
     });
     paper.on("cell:pointerclick", function(cellView, evt, x, y) {
@@ -62,14 +58,14 @@ var createPapers = function (graph) {
                 var cell = cellView.model;
                 if (subtrees[cell.id]) {
                     graph.addCells(subtrees[cell.id].sort(function(a, b) {
-                        return a instanceof joint.dia.Link ? 1 : -1
+                        return a instanceof joint.dia.Link ? 1 : -1;
                     }));
                     delete subtrees[cell.id];
                     return;
                 }
 
                 function store(cell) {
-                    (subtrees[cellView.model.id] || (subtrees[cellView.model.id] = [])).push(cell)
+                    (subtrees[cellView.model.id] || (subtrees[cellView.model.id] = [])).push(cell);
                 }
                 graph.on("remove", store);
             //    getTree(cellView.model);
