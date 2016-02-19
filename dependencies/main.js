@@ -29,11 +29,47 @@ graph.on('remove', function (cell) {
 $.get('./dependencies/data.json', function (data) {
 
     graph.fromJSON(data);
+    prepareGraph(graph);
     createPapers(graph);
     layoutGraph(graph);
     layoutTables(graph);
 });
 
+var prepareGraph = function(graph) {
+
+    var bfs = function(graph, element, iteratee, opt) {
+
+        opt = opt || {};
+        var visited = {};
+        var distance = {};
+        var queue = [];
+
+        queue.push(element);
+        distance[element.id] = 0;
+
+        while (queue.length > 0) {
+            var next = queue.shift();
+            if (!visited[next.id]) {
+                visited[next.id] = true;
+                if (iteratee(next, distance[next.id]) === false) return;
+                _.each(graph.getNeighbors(next, opt), function(neighbor) {
+                    // Method taken from joint.dia.Graph
+                    // This check is added here in order to keep
+                    // sibling elements on the same rank
+                    if (!_.isUndefined(distance[neighbor.id])) return;
+                    distance[neighbor.id] = distance[next.id] + 1;
+                    queue.push(neighbor);
+                });
+            }
+        }
+    };
+
+    _.each(graph.getSources(), function(source) {
+        bfs(graph, source, function(el, level) {
+            el.set('rank', level);
+        });
+    });
+};
 var createPapers = function (graph) {
 
     paper.on("cell:pointerdown", function(cellView, evt, x, y) {
@@ -100,7 +136,7 @@ var createPapers = function (graph) {
                 _.each(children(cellView.model), function (child) {
                     child.set('position', {
                         x: modelPosition.x + child.distance.x,
-                        y: modelPosition.y + child.distance.y,
+                        y: modelPosition.y + child.distance.y
                     })
                 });
             }
@@ -109,11 +145,13 @@ var createPapers = function (graph) {
 
     function getParent(element) {
         var parents = [];
+        var rank = element.get('rank');
         _.each(graph.getConnectedLinks(element, {
             inbound: true
         }), function (link) {
-            if (!link.prop('sibling')) {
-                parents.push(graph.getCell(link.get("source").id));
+            var source = graph.getCell(link.get('source').id);
+            if (source && source.get('rank') !== rank) {
+                parents.push(source);
             }
         });
         return parents;
@@ -124,11 +162,12 @@ var createPapers = function (graph) {
         return children;
     }
     function getChildren(element, children) {
+        var rank = element.get('rank');
         _.each(graph.getConnectedLinks(element, {
             outbound: true
         }), function(link) {
-            if (!link.prop('sibling')) {
-                var target = graph.getCell(link.get("target").id);
+            var target = graph.getCell(link.get('target').id);
+            if (target && target.get('rank') !== rank) {
                 children.push(target);
                 getChildren(target, children);
             }
@@ -136,11 +175,12 @@ var createPapers = function (graph) {
     }
 
     function removeSubtree(element) {
+        var rank = element.get('rank');
         _.each(graph.getConnectedLinks(element, {
             outbound: true
         }), function(link) {
-            if (!link.prop('sibling')) {
-                var target = graph.getCell(link.get("target").id);
+            var target = graph.getCell(link.get('target').id);
+            if (target && target.get('rank') !== rank) {
                 removeSubtree(target);
                 target.remove();
             }
@@ -148,11 +188,12 @@ var createPapers = function (graph) {
     }
 
     function removeUptree(element) {
+        var rank = element.get('rank');
         _.each(graph.getConnectedLinks(element, {
             inbound: true
         }), function(link) {
-            if (!link.prop('sibling')) {
-                var source = graph.getCell(link.get('source').id);
+            var source = graph.getCell(link.get('source').id);
+            if (source && source.get('rank') !== rank) {
                 removeUptree(source);
                 source.remove();
             }
