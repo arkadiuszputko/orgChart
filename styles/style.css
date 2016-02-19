@@ -80,3 +80,8 @@ body {
         height: 232mm !important;
     }
 }
+
+/* Highlight the first row of Node text */
+.element.Node .name > tspan:first-child {
+  font-weight: 800;
+}
