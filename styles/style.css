@@ -73,8 +73,6 @@ body {
 @media print and (orientation:landscape) {
 
     .print-papers {
-        width: 260mm !important;
-        height: 174mm !important;
     }
 
 }
@@ -82,8 +80,6 @@ body {
 @media print and (orientation:portrait) {
 
     .print-papers {
-        width: 200mm !important;
-        height: 232mm !important;
     }
 }
 
