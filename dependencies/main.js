@@ -306,29 +306,35 @@ function beforePrint(landscape) {
             printPapers[x].setOrigin(originX, originY);
 
             var area = printPapers[x].getArea();
-            var elements = printPapers[x].findViewsInArea(area);
+            var elements = printGraphs[x].findModelsInArea(area);
             console.log(area);
             var moveX = 0;
             var moveY = 0;
             if (elements.length) {
                 _.each(elements, function (e) {
-                    var bbox = e.model.getBBox();
+                    var bbox = e.getBBox();
                     if (bbox.x + bbox.width >= area.x + printSize.width) {
-                        e.model.set('position', {x: area.x + printSize.width + 5, y: bbox.y});
+                        e.set('position', {
+                            x: area.x + printSize.width + 5,
+                            y: bbox.y
+                        });
                         moveX = Math.abs(bbox.x - (area.x + printSize.width));
                         _.each(printGraphs[x].getElements(), function (element) {
                             var elBbox = element.getBBox();
-                            if (elBbox.x > bbox.x && e.model.id != element.id) {
+                            if (elBbox.x > bbox.x && e.id != element.id) {
                                 element.set('position', {x: elBbox.x + moveX, y: elBbox.y});
                             }
                         });
                     }
-                    if (bbox.y + bbox.height > printSize.height) {
-                        e.model.set('position', {x: bbox.x, y: printSize.height + bbox.height + 5});
+                    if (bbox.y + bbox.height > area.y + printSize.height) {
+                        e.set('position', {
+                            x: bbox.x,
+                            y: area.y + printSize.height + 5
+                        });
                         moveY = Math.abs(bbox.y - (area.y + printSize.height));
                         _.each(printGraphs[x].getElements(), function (element) {
                             var elBbox = element.getBBox();
-                            if (elBbox.y > bbox.y && e.model.id != element.id) {
+                            if (elBbox.y > bbox.y && e.id != element.id) {
                                 element.set('position', {x: elBbox.x, y: elBbox.y + moveY});
                             }
                         });
