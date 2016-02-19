@@ -34,7 +34,7 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
 
             '.name': {
                 'font-weight': 500,
-                'font-family': 'Courier New', 'font-size': 14,
+                'font-family': 'Courier New', 'font-size': 16,
                 'text-anchor': 'middle',
                 ref: '.card', 'ref-x': .5, 'ref-y': 10
             },
