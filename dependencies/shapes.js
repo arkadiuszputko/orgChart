@@ -2,7 +2,7 @@
 
 Copyright (c) 2015 client IO
 
- 2015-12-22 
+ 2015-12-22
 
 
 This Source Code Form is subject to the terms of the Rappid License
@@ -18,7 +18,7 @@ joint.shapes.orgChart = {};
 
 joint.shapes.orgChart.Node = joint.dia.Element.extend({
 
-    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="name"/><circle class="expand"/></g>',
+    markup: '<g class="rotatable"><g class="scalable"><rect class="card"/></g><text class="name"/><path class="expand"/></g>',
 
     defaults: joint.util.deepSupplement({
 
@@ -36,19 +36,17 @@ joint.shapes.orgChart.Node = joint.dia.Element.extend({
             '.name': {
                 'font-weight': '800',
                 'font-family': 'Courier New', 'font-size': 14,
-                'text-anchor': 'end',
+                'text-anchor': 'middle',
                 ref: '.card', 'ref-x': .5, 'ref-y': 10,
             },
             '.expand': {
                 ref: '.card',
-                'ref-dx': -10,
-                'ref-y': 10, 
-                'width': 20,
-                'height': 20,
+                'ref-dx': -25,
+                'ref-y': 10,
                 'fill': '#ffffff',
-                'r': 10,
                 'stroke': '#000000',
                 'stroke-width': 1,
+                'd': 'M 10 0 10 20 M 0 10 20 10'
             }
         }
     }, joint.dia.Element.prototype.defaults),
@@ -106,7 +104,7 @@ joint.shapes.orgChart.Connection = joint.dia.Link.extend({
     defaults: {
         type: 'orgChart.Connection',
         source: { selector: '.card' }, target: { selector: '.card' },
-        attrs: { 
+        attrs: {
             '.connection': { stroke: '#585858', 'stroke-width': 3 },
             '.': {'pointer-events': 'none'}
         },
