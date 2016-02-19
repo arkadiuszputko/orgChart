@@ -207,10 +207,14 @@ var layoutGraph = function (graph) {
 var layoutTables = function (graph) {
     var tmpGraph = new joint.dia.Graph();
     var tables = _.filter(graph.getCells(), function(cell) { return (cell instanceof joint.shapes.orgChart.Table) });
+    var columnWidth = 0;
+    _.each(tables, function (table) {
+        columnWidth = table.getBBox().width > columnWidth ? table.getBBox().width : columnWidth;
+    });
     tmpGraph.resetCells(tables);
     joint.layout.GridLayout.layout(tmpGraph, {
         columns: 200,
-        columnWidth: 300,
+        columnWidth: columnWidth + 10,
         dx: 0,
         dy: graph.getBBox(graph.getCells()).height
     });
