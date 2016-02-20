@@ -66,7 +66,7 @@ var prepareGraph = function(graph) {
 
     _.each(graph.getSources(), function(source) {
         bfs(graph, source, function(el, level) {
-            el.set('rank', level);
+            el.set('rank', 'same_' + level);
         });
     });
 };
