@@ -263,11 +263,18 @@ var layoutTables = function (graph) {
         columnWidth = table.getBBox().width > columnWidth ? table.getBBox().width : columnWidth;
     });
     tmpGraph.resetCells(tables);
+
     joint.layout.GridLayout.layout(tmpGraph, {
         columns: 200,
-        columnWidth: columnWidth + 10,
+        columnWidth: columnWidth + 40,
         dx: 0,
-        dy: graph.getBBox(graph.getCells()).height
+        dy: 0,
+        centre: false
+    });
+
+    var y = graph.getBBox(graph.getCells()).height + 200;
+    _.each(tables, function(table) {
+        table.position(table.prop('position/x'), y);
     });
 };
 
@@ -382,7 +389,7 @@ function beforePrint(landscape) {
                             }
                         });
                     }
-                    if (bbox.y + bbox.height > area.y + printSize.height) {
+                    if (bbox.y + bbox.height >= area.y + printSize.height) {
                         e.set('position', {
                             x: bbox.x,
                             y: area.y + printSize.height + 5
