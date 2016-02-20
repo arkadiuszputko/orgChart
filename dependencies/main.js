@@ -297,6 +297,7 @@ $('#changeRankDir').click(function() {
     $el.text(text[oldRankDir]);
     layoutRankDir = newRankDir;
     layoutGraph(graph);
+    layoutTables(graph);
 });
 /*
 $('#printPortrait').click(function () {
@@ -323,6 +324,7 @@ function afterPrint() {
     $('#paper').show();
     $('#printPortrait').show();
     $('#printLandscape').show();
+    $('#changeRankDir').show();
 }
 
 function beforePrint(landscape) {
@@ -450,6 +452,7 @@ function beforePrint(landscape) {
         $('#paper').hide();
         $('#printPortrait').hide();
         $('#printLandscape').hide();
+        $('#changeRankDir').hide();
     }
 };
 
