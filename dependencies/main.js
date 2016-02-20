@@ -241,9 +241,8 @@ var layoutGraph = function (graph) {
     });
     tmpGraph.resetCells(nodes);
     joint.layout.DirectedGraph.layout(tmpGraph, {
-        rankSep: 40,
-        nodeSep: 40,
-        edgeSep: 40,
+        rankSep: 60,
+        nodeSep: 60,
         rankDir: layoutRankDir
     });
 };
@@ -283,7 +282,8 @@ $('#printLandscape').click(function () {
     setTimeout(function(){
         $(window).one('mousemove', window.onafterprint);
     }, 1);
-});
+
+ });
 
 $('#changeRankDir').click(function() {
     var $el = $(this);
@@ -375,6 +375,11 @@ function beforePrint(landscape) {
             printPapers[x].setOrigin(originX, originY);
 
             var area = printPapers[x].getArea();
+            // extend the area by 1 pixel so elements lying on the edge
+            // are taken into account
+            area.height++;
+            area.width++;
+
             var elements = printGraph.findModelsInArea(area);
             var moveX = 0;
             var moveY = 0;
