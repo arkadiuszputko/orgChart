@@ -235,9 +235,10 @@ var layoutGraph = function (graph) {
     var nodes = _.filter(graph.getCells(), function(cell) { return !(cell instanceof joint.shapes.orgChart.Table) })
     tmpGraph.resetCells(nodes);
     joint.layout.DirectedGraph.layout(tmpGraph, {
-        nodeSep: 10,
-        edgeSep: 10,
-        rankDir: 'B'
+        rankSep: 40,
+        nodeSep: 40,
+        edgeSep: 40,
+        rankDir: 'TB'
     });
 };
 
