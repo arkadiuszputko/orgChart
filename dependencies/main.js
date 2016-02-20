@@ -228,24 +228,16 @@ var createPapers = function (graph) {
         var others = _.difference(graph.getElements(), tree.concat(treeTables));
         _.each(others, function (cell) {
             cell.remove();
-        })
+        });
     }
 };
 
 var layoutGraph = function (graph) {
-    /*var graphLayout = new joint.layout.TreeLayout({
-        graph: graph,
-        gap: 50,
-        siblingGap: 50,
-        direction: 'B'
-    });
 
-    var nodes = _.filter(graph.getCells(), function(cell) { return !(cell instanceof joint.shapes.orgChart.Table) })
-
-    graphLayout.layout(nodes);
-    graph.resetCells(graph.getCells());*/
     var tmpGraph = new joint.dia.Graph();
-    var nodes = _.filter(graph.getCells(), function(cell) { return !(cell instanceof joint.shapes.orgChart.Table) })
+    var nodes = _.filter(graph.getCells(), function(cell) {
+        return !(cell instanceof joint.shapes.orgChart.Table);
+    });
     tmpGraph.resetCells(nodes);
     joint.layout.DirectedGraph.layout(tmpGraph, {
         rankSep: 40,
@@ -257,7 +249,9 @@ var layoutGraph = function (graph) {
 
 var layoutTables = function (graph) {
     var tmpGraph = new joint.dia.Graph();
-    var tables = _.filter(graph.getCells(), function(cell) { return (cell instanceof joint.shapes.orgChart.Table) });
+    var tables = _.filter(graph.getCells(), function(cell) {
+        return (cell instanceof joint.shapes.orgChart.Table);
+    });
     var columnWidth = 0;
     _.each(tables, function (table) {
         columnWidth = table.getBBox().width > columnWidth ? table.getBBox().width : columnWidth;
@@ -279,7 +273,6 @@ var layoutTables = function (graph) {
 };
 
 var printPapers = [];
-var printGraphs = [];
 
 
 $('#printLandscape').click(function () {
@@ -310,7 +303,6 @@ function afterPrint() {
 
     _.invoke(printPapers, 'remove');
     printPapers = [];
-    printGraphs = [];
 
     $('.print-papers').remove();
     $('#paper').show();
@@ -345,81 +337,105 @@ function beforePrint(landscape) {
     var x = 0;
     var graphJson = graph.toJSON();
 
+    var printGraph = new joint.dia.Graph();
+    printGraph.fromJSON(graphJson);
+
     for (var j = 0; j <= height; j++) {
         for (var i = 0; i <= wide; i++) {
             var el = $('<div id="printCopy' + x + '" style="width: ' + printSize.width + 'px; height:' + printSize.height + 'px" class="print-papers"></div>').appendTo('body');
-            printGraphs[x] = new joint.dia.Graph();
 
             printPapers[x] = new joint.dia.Paper({
                 el: el,
                 width: printSize.width,
                 height: printSize.height,
                 gridSize: 1,
-                model: printGraphs[x]
+                model: printGraph
             });
 
-            // Initiate panning when the user grabs the blank area of the paper.
-
-            printGraphs[x].fromJSON(graphJson);
-
-            var elementsBBox = printGraphs[x].getBBox(printGraphs[x].getCells());
+            var elementsBBox = printGraph.getBBox(printGraph.getCells());
             var originX = - elementsBBox.x - i * printSize.width;
             var originY = - elementsBBox.y - j * printSize.height;
 
             printPapers[x].setOrigin(originX, originY);
 
             var area = printPapers[x].getArea();
-            var elements = printGraphs[x].findModelsInArea(area);
-            console.log(area);
+            var elements = printGraph.findModelsInArea(area);
             var moveX = 0;
             var moveY = 0;
             if (elements.length) {
-                _.each(elements, function (e) {
+
+                var movedX = {};
+                var movedY = {};
+
+                _.each(elements, function (e, index, elements) {
+                    // X-coordinate translation
                     var bbox = e.getBBox();
                     if (bbox.x + bbox.width >= area.x + printSize.width) {
-                        e.set('position', {
-                            x: area.x + printSize.width + 5,
-                            y: bbox.y
-                        });
-                        moveX = Math.abs(bbox.x - (area.x + printSize.width));
-                        _.each(printGraphs[x].getElements(), function (element) {
+
+                        var positionX = area.x + printSize.width + 5;
+                        e.position(positionX, bbox.y);
+                        moveX = positionX - bbox.x;
+                        var otherXElements = _.difference(
+                            printGraph.getElements(),
+                            elements
+                        );
+                        _.each(otherXElements, function (element) {
+
+                            var elementMoveX;
+                            if (!movedX[element.id]) {
+                                elementMoveX = moveX;
+                            } else {
+                                elementMoveX = moveX - movedX[element.id];
+                            }
+
                             var elBbox = element.getBBox();
-                            if (elBbox.x > bbox.x && e.id != element.id) {
-                                element.set('position', {x: elBbox.x + moveX, y: elBbox.y});
+                            if (elementMoveX > 0 && elBbox.x > bbox.x) {
+                                movedX[element.id] = moveX;
+                                element.translate(elementMoveX, 0);
                             }
                         });
                     }
+
+                    // Y-coordinate translation
                     if (bbox.y + bbox.height >= area.y + printSize.height) {
-                        e.set('position', {
-                            x: bbox.x,
-                            y: area.y + printSize.height + 5
+
+                        var positionY = area.y + printSize.height + 5;
+                        e.position(bbox.x, positionY);
+                        moveY = positionY - bbox.y;
+                        var otherYElements = _.difference(
+                            printGraph.getElements(),
+                            elements
+                        );
+                        _.each(otherYElements, function (element) {
+                            var elementMoveY;
+                            if (!movedY[element.id]) {
+                                elementMoveY = moveY;
+                            } else {
+                                elementMoveY = moveY - movedY[element.id];
+                            }
+                            var elBbox = element.getBBox();
+                            if (elementMoveY > 0 && elBbox.y > bbox.y) {
+                                movedY[element.id] = moveY;
+                                element.translate(0, elementMoveY);
+                            }
                         });
-                        if (e.get('type') !== 'orgChart.Table') {
-                            moveY = Math.abs(bbox.y - (area.y + printSize.height));
-                            _.each(printGraphs[x].getElements(), function (element) {
-                                var elBbox = element.getBBox();
-                                if (elBbox.y > bbox.y && e.id != element.id) {
-                                    element.set('position', {x: elBbox.x, y: elBbox.y + moveY});
-                                }
-                            });
-                        }
                     }
                 });
             } else {
                 el.remove();
             }
 
-            graphJson = printGraphs[x].toJSON();
             x++;
         }
+
+        _.each(printPapers, function(printPaper) {
+            V(printPaper.svg).attr({ width: '100%', height: '100%' });
+            _.each(printGraph.getCells(), printPaper.renderView, printPaper);
+        });
+
         $('#paper').hide();
         $('#printPortrait').hide();
         $('#printLandscape').hide();
-        _.each($('.print-papers svg'), function (el) {
-            el.setAttribute('width', '100%')
-            el.setAttribute('height', '100%')
-        });
-
     }
 };
 
