@@ -69,6 +69,19 @@ var prepareGraph = function(graph) {
             el.set('rank', 'same_' + level);
         });
     });
+
+    _.each(graph.getSinks(), function(sink) {
+        if (sink.get('type') === 'orgChart.Node') {
+            sink.attr('.expand/display', 'none');
+            var sinkRank = sink.get('rank');
+            _.each(graph.getNeighbors(sink, { inbound: true }), function(neighbor) {
+                if (neighbor.get('rank') === sinkRank) {
+                    // It's not really a parent but sibling
+                    neighbor.attr('.expand/display', 'none');
+                }
+            });
+        }
+    });
 };
 var createPapers = function (graph) {
 
