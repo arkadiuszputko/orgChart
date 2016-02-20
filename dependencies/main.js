@@ -1,3 +1,4 @@
+var layoutRankDir = 'TB';
 var graph = new joint.dia.Graph();
 
 var paper = new joint.dia.Paper({
@@ -243,7 +244,7 @@ var layoutGraph = function (graph) {
         rankSep: 40,
         nodeSep: 40,
         edgeSep: 40,
-        rankDir: 'TB'
+        rankDir: layoutRankDir
     });
 };
 
@@ -283,6 +284,20 @@ $('#printLandscape').click(function () {
         $(window).one('mousemove', window.onafterprint);
     }, 1);
 });
+
+$('#changeRankDir').click(function() {
+    var $el = $(this);
+    var text = {
+        TB: 'Top Bottom',
+        LR: 'Left Right'
+    };
+    var oldRankDir = $el.attr('data-rankdir');
+    var newRankDir = oldRankDir === 'TB' ? 'LR' : 'TB';
+    $el.attr('data-rankdir', newRankDir);
+    $el.text(text[oldRankDir]);
+    layoutRankDir = newRankDir;
+    layoutGraph(graph);
+});
 /*
 $('#printPortrait').click(function () {
     beforePrint();
@@ -316,7 +331,6 @@ function beforePrint(landscape) {
     var bbox = graph.getBBox(cells);
     var content = paper.getContentBBox();
 
-    console.log(bbox, content);
     if (landscape) {
         var printSize = {
             width: 1692,
