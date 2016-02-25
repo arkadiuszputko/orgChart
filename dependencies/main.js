@@ -245,7 +245,7 @@ var layoutGraph = function (graph) {
     });
     tmpGraph.resetCells(nodes);
     joint.layout.DirectedGraph.layout(tmpGraph, {
-        rankSep: 60,
+        rankSep: 300,
         nodeSep: 60,
         rankDir: layoutRankDir
     });
