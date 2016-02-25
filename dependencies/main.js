@@ -28,7 +28,11 @@ graph.on('remove', function (cell) {
 });
 
 $.get('./dependencies/data.json', function (data) {
-
+    _.each(data.cells, function (cell) { 
+        if (cell.type !== 'orgChart.Connection') {
+            cell.z = 2;
+        }
+    });
     graph.fromJSON(data);
     prepareGraph(graph);
     createPapers(graph);
@@ -451,7 +455,12 @@ function beforePrint(landscape) {
 
         _.each(printPapers, function(printPaper) {
             V(printPaper.svg).attr({ width: '100%', height: '100%' });
-            _.each(printGraph.getCells(), printPaper.renderView, printPaper);
+            _.each(
+                _.sortBy(printGraph.getCells(), function (cell) { return cell.attributes.type }).reverse(), 
+                printPaper.renderView,
+                printPaper
+            );
+            printPaper.sortViews();
         });
 
         $('#paper').hide();
